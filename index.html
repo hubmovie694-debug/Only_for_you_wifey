@@ -1,0 +1,982 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10051d">
+<title>For My Favourite Person ♡</title>
+
+<style>
+:root {
+  --pink: #ff72bd;
+  --rose: #ff3e8d;
+  --purple: #a78bfa;
+  --gold: #ffe6a7;
+  --white: #fff7fc;
+  --glass: rgba(255,255,255,.085);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--white);
+  background: #10051d;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scene {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  min-height: 100vh;
+  padding: 70px 20px 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+  background:
+    radial-gradient(ellipse at 20% 20%, #59255c 0, transparent 45%),
+    radial-gradient(ellipse at 85% 80%, #32194f 0, transparent 50%),
+    linear-gradient(145deg, #10051d, #260b32 50%, #10051d);
+}
+
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: -2;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(255,80,170,.13),
+    transparent,
+    rgba(120,90,255,.16),
+    transparent
+  );
+  filter: blur(50px);
+  animation: aurora 20s linear infinite;
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .2;
+  pointer-events: none;
+  background-image: radial-gradient(#fff 1px, transparent 1.5px);
+  background-size: 43px 43px;
+  animation: starDrift 35s linear infinite;
+  mask-image: linear-gradient(transparent, black 20%, black 85%, transparent);
+}
+
+@keyframes aurora {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes starDrift {
+  from { background-position: 0 0; }
+  to { background-position: 180px 400px; }
+}
+
+.content {
+  width: min(100%, 740px);
+  position: relative;
+  z-index: 2;
+  animation: arrive 1s both;
+}
+
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(25px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font: 11px/1.8 Arial, sans-serif;
+  margin-bottom: 15px;
+}
+
+h1, h2 {
+  text-wrap: balance;
+  text-shadow: 0 0 25px rgba(255,100,190,.3);
+}
+
+h1 {
+  font-size: clamp(36px, 8vw, 67px);
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+
+h2 {
+  font-size: clamp(28px, 6vw, 45px);
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+p {
+  font-size: clamp(15px, 3.7vw, 19px);
+  line-height: 1.85;
+  color: #f7e6f5;
+}
+
+.accent {
+  color: #ff9bce;
+  font-style: italic;
+}
+
+.photo-frame {
+  width: min(100%, 390px);
+  margin: 24px auto;
+  padding: 8px;
+  position: relative;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #ff9ad2, #a78bfa, #ffe6a7, #ff72bd);
+  background-size: 300% 300%;
+  animation: borderGlow 6s ease infinite, photoFloat 5s ease-in-out infinite;
+  box-shadow: 0 0 35px rgba(255,90,180,.25);
+}
+
+@keyframes borderGlow {
+  0%, 100% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes photoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: clamp(230px, 43vh, 430px);
+  object-fit: contain;
+  background: rgba(10,4,20,.65);
+  border-radius: 17px;
+}
+
+.photo-frame.wide img {
+  height: clamp(200px, 35vh, 340px);
+}
+
+.caption {
+  font-style: italic;
+  color: #ffe3f2;
+  font-size: 15px;
+  margin: 14px auto 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.btn {
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 999px;
+  padding: 14px 22px;
+  color: white;
+  background: rgba(255,255,255,.09);
+  backdrop-filter: blur(12px);
+  transition: transform .25s, box-shadow .25s, background .25s;
+  box-shadow: 0 6px 25px rgba(0,0,0,.15);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(255,100,190,.3);
+}
+
+.btn.primary {
+  background: linear-gradient(110deg, #ff4c9b, #b44cff);
+  border-color: transparent;
+}
+
+.btn.soft {
+  color: #ffe6f5;
+  background: rgba(255,255,255,.055);
+}
+
+.card {
+  margin: 18px auto;
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 12px 45px rgba(0,0,0,.12);
+  backdrop-filter: blur(12px);
+  text-align: left;
+}
+
+.card p { font-size: 16px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px auto;
+}
+
+.reason {
+  padding: 18px 12px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,160,220,.19);
+  animation: gentlePulse 4s ease-in-out infinite;
+}
+
+.reason:nth-child(even) { animation-delay: 1s; }
+
+.reason b { color: #ffb9dc; font-size: 17px; }
+.reason span { font-size: 14px; color: #f2deee; }
+
+@keyframes gentlePulse {
+  0%, 100% { box-shadow: 0 0 0 transparent; }
+  50% { box-shadow: 0 0 20px rgba(255,100,190,.1); }
+}
+
+.letter {
+  display: none;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.letter.show {
+  display: block;
+  animation: arrive .8s both;
+}
+
+.letter p { font-size: 16px; }
+
+.music-control {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 20;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(30,10,40,.7);
+  backdrop-filter: blur(12px);
+  border-radius: 30px;
+  padding: 10px 14px;
+  color: white;
+  font: 12px Arial, sans-serif;
+}
+
+.progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 25;
+  background: rgba(255,255,255,.1);
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff65b4, #c4a1ff, #ffe6a7);
+  transition: width .2s;
+}
+
+.petal {
+  position: fixed;
+  z-index: 1;
+  bottom: -35px;
+  pointer-events: none;
+  opacity: 0;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  10% { opacity: .8; }
+  100% { transform: translateY(-115vh) rotate(540deg); opacity: 0; }
+}
+
+.choice-no {
+  position: relative;
+}
+
+.heart-scene {
+  background:
+    radial-gradient(ellipse at center, rgba(165,35,104,.35), transparent 60%),
+    linear-gradient(145deg, #090515, #210829, #090515);
+}
+
+#heartCanvas {
+  width: min(100%, 650px);
+  height: min(48vh, 390px);
+  display: block;
+  margin: 10px auto;
+  overflow: visible;
+}
+
+.heart-title {
+  font-size: clamp(34px, 8vw, 64px);
+  color: #fff0fa;
+  opacity: 0;
+  letter-spacing: 3px;
+  text-shadow: 0 0 12px #ff4ca7, 0 0 35px #ff2d9a, 0 0 70px #9c55ff;
+  transition: opacity 2s;
+}
+
+.heart-title.visible { opacity: 1; }
+
+.heart-subtitle {
+  opacity: 0;
+  transition: opacity 2s 1s;
+}
+
+.heart-subtitle.visible { opacity: 1; }
+
+.proposal {
+  border: 1px solid rgba(255,180,225,.25);
+  background: rgba(255,255,255,.055);
+  padding: 25px 18px;
+  border-radius: 24px;
+}
+
+.shayari {
+  color: #ffe5f3;
+  font-style: italic;
+  line-height: 2;
+  margin-top: 18px;
+}
+
+.rooftop {
+  background:
+    linear-gradient(180deg, rgba(8,8,36,.15), rgba(8,4,25,.85)),
+    radial-gradient(ellipse at 50% 25%, #69418e, transparent 60%),
+    linear-gradient(#15102e, #39204e 55%, #110b20);
+}
+
+.rooftop .photo-frame {
+  box-shadow: 0 0 40px rgba(175,140,255,.24);
+}
+
+.final-glow {
+  font-size: clamp(23px, 5vw, 35px);
+  color: #ffd6ee;
+  text-shadow: 0 0 30px #ff4ca7;
+  animation: finalPulse 2.8s infinite;
+}
+
+@keyframes finalPulse {
+  0%, 100% { transform: scale(1); opacity: .85; }
+  50% { transform: scale(1.035); opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  .scene { padding: 65px 17px 80px; }
+  .card { padding: 18px; }
+  .grid { gap: 9px; }
+  .reason { padding: 14px 8px; min-height: 100px; }
+  .btn { padding: 13px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-control" id="musicBtn" onclick="toggleMusic()">
+  ♫ Play our song
+</button>
+
+<div class="progress"><span id="progressBar"></span></div>
+
+<!-- SCENE 1: INTRO -->
+<section class="scene" id="p1">
+  <div class="content">
+    <div class="eyebrow">A little world, made for you</div>
+    <h1>Hey, my <span class="accent">favourite person</span> ♡</h1>
+    <div class="photo-frame">
+      <img src="images/image 1.jpg" alt="Our first scene" fetchpriority="high">
+    </div>
+    <p>There are some things my heart wants to tell you.</p>
+    <p class="caption">So I made this little surprise, just for you. ✨</p>
+    <div class="card">
+      <h2 style="font-size:27px">I love you, cutie ♡</h2>
+      <p>Every little detail here has a piece of my heart in it.</p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="go(2)">Let's begin ♡</button>
+      <button class="btn soft" onclick="go(3)">Read my apology</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 2: CHOICE -->
+<section class="scene" id="p2">
+  <div class="content">
+    <div class="eyebrow">One tiny question</div>
+    <h1>What's in your <span class="accent">heart?</span></h1>
+    <div class="photo-frame">
+      <img src="images/image 2.jpg" alt="A little question">
+    </div>
+    <div class="card">
+      <p>Before we go on, I just want you to know that you matter to me more than these words can explain.</p>
+    </div>
+    <p>Can I show you something I made with love?</p>
+    <div class="actions">
+      <button class="btn primary" onclick="go(3)">Okay, show me ♡</button>
+      <button class="btn soft choice-no" id="noChoice" onclick="dodge(this)">Not yet 🙈</button>
+    </div>
+    <p id="choiceMessage" class="caption" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- SCENE 3: APOLOGY -->
+<section class="scene" id="p3">
+  <div class="content">
+    <div class="eyebrow">From the bottom of my heart</div>
+    <h1>I'm really sorry, <span class="accent">sweetheart.</span></h1>
+    <div class="photo-frame">
+      <img src="images/image 3.jpg" alt="A heartfelt apology">
+    </div>
+    <div class="card">
+      <p>I know that sometimes I may not express myself perfectly. I never want my words or actions to make you feel less loved or less important.</p>
+      <br>
+      <p>I'm not asking you to forget how you feel. I just want to listen, understand you better, and keep learning how to love you with more patience and care.</p>
+      <br>
+      <p>You deserve kindness, honesty, respect, and the space to feel whatever you feel. ♡</p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="go(4)">Let's keep going ♡</button>
+      <button class="btn soft" onclick="go(4)">I'll read the rest</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 4: REASONS -->
+<section class="scene" id="p4">
+  <div class="content">
+    <div class="eyebrow">A thousand little reasons</div>
+    <h1>Reasons I <span class="accent">love you</span> ♡</h1>
+    <div class="photo-frame">
+      <img src="images/image 4.jpg" alt="Reasons I love you">
+    </div>
+    <div class="grid">
+      <div class="reason"><b>Your kind heart ♡</b><span>The care you show in little ways.</span></div>
+      <div class="reason"><b>Your smile ✨</b><span>A little happiness I can remember.</span></div>
+      <div class="reason"><b>Your calm nature 🌷</b><span>The gentle side of you I adore.</span></div>
+      <div class="reason"><b>Your beautiful mind 💗</b><span>The thoughts that make you you.</span></div>
+      <div class="reason"><b>Our silly moments ☁️</b><span>The laughs that become memories.</span></div>
+      <div class="reason"><b>Simply you 💞</b><span>No reason needed. Just you.</span></div>
+    </div>
+    <p>And honestly, this list could go on forever.</p>
+    <div class="actions">
+      <button class="btn primary" onclick="go(5)">Open my letter 💌</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 5: LETTER -->
+<section class="scene" id="p5">
+  <div class="content">
+    <div class="eyebrow">A letter I want you to keep</div>
+    <h1>My dear <span class="accent">wifey</span> 💌</h1>
+    <div class="photo-frame">
+      <img src="images/image 5.jpg" alt="A love letter">
+    </div>
+    <div class="card">
+      <p>Some feelings are easier to carry in your heart than to explain out loud. So here are a few of mine, written just for you.</p>
+      <div class="actions">
+        <button class="btn primary" id="revealBtn" onclick="revealLetter()">Open my heart ♡</button>
+      </div>
+      <div class="letter" id="loveLetter">
+        <p>
+My dear wifey, ♡
+
+Kabhi-kabhi main sochta hoon ki meri life mein tumhara aana kitni pyaari baat hai. I never imagined that one ordinary day could lead me to someone who would become so special to me.
+
+Tumhari sweetness, tumhari humility, tumhara calm nature, aur tumhara apna sa andaaz — mujhe tumhari bahut si baatein pasand hain. I have never met someone quite like you.
+
+Hamari story mein happy moments bhi aaye, disagreements bhi hue, aur aise moments bhi aaye jab humein ek-doosre ko aur achhe se samajhna pada. But those moments don't erase the beautiful things we've shared.
+
+Mera pyaar kisi ek perfect day par depend nahi karta. Main chahta hoon ki main tumhe achhe waqt mein bhi care karun, difficult waqt mein bhi respect doon, aur har din tumhe samajhne ki koshish karun.
+
+January se shuru hui hamari story mere liye bahut special hai. Aur aage jo bhi ho, main chahta hoon ki hum honesty, kindness aur understanding ke saath apne moments banayein.
+
+Tum mere liye sirf ek message ya ek memory nahi ho. Tum woh insaan ho jiske saath chhoti-chhoti baatein bhi yaadgaar ban gayi hain.
+
+Tumhari khushi important hai. Tumhari feelings important hain. Aur tumhari apni space bhi important hai.
+
+Dil ki baat bas itni si hai:
+Tumhari hansi se roshan meri har shaam rahe,
+Tum khush raho, tumhare dil ko sukoon aur aaraam rahe.
+Har mod par mile tumhe izzat aur pyaar,
+Aur hamari yaadon mein khilte rahein khushiyon ke gulzaar. ♡
+
+With all my heart,
+Your person ❤️
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="go(6)">Our little story ✨</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 6: OUR STORY -->
+<section class="scene" id="p6">
+  <div class="content">
+    <div class="eyebrow">It all started in a game</div>
+    <h1>Our Little <span class="accent">Story</span> 🎮</h1>
+    <div class="photo-frame">
+      <img src="images/image 6.jpg" alt="Our little story">
+    </div>
+    <div class="card">
+      <p>Kabhi socha nahi tha ki ek normal si Free Fire ki raat meri life ki itni special story ban jayegi. Ek lobby mein hum mile, phir ek-do matches saath khele. Dheere-dheere saath khelna achha lagne laga, aur phir game se zyada ek-doosre se baatein karna special ho gaya.</p>
+      <br>
+      <p>Pehle sirf game ki typing chats hoti thi, phir maine tumse tumhari Instagram ID maangi. Instagram se baatein WhatsApp tak pahunchi, aur phir calls par tumhari awaaz sunna meri favourite cheezon mein se ek ban gaya.</p>
+      <br>
+      <p>Phir aaya <span class="accent">4 January</span> — woh din jab maine tumhe apne dil ki baat batayi. Aur <span class="accent">7 January</span> ko jab tumne kaha, “I love you too,” toh meri ek simple si gaming story meri life ki sabse pyaari memories mein badal gayi. ❤️</p>
+      <br>
+      <p class="shayari">Ek lobby se shuru hua tha safar,<br>tum ban gayi dil ka sabse pyaara humsafar. ♡</p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="go(7)">Something magical ✨</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 7: GLOWING PARTICLE HEART -->
+<section class="scene heart-scene" id="p7">
+  <div class="content">
+    <div class="eyebrow">A little universe, just for you</div>
+    <h1 class="heart-title" id="heartTitle">You Are My World</h1>
+    <canvas id="heartCanvas" aria-label="Glowing heart made of sparkling particles"></canvas>
+    <p class="heart-subtitle" id="heartSubtitle">You are my world, and I love you so much. ♡</p>
+    <div class="actions">
+      <button class="btn primary" onclick="go(8)">One more thing 💗</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 8: PROPOSAL -->
+<section class="scene" id="p8">
+  <div class="content">
+    <div class="eyebrow">A question from my heart</div>
+    <div class="photo-frame">
+      <img src="images/image 8.jpg" alt="A special question">
+    </div>
+    <div class="proposal">
+      <h1>Will You Be My <span class="accent">Forever?</span></h1>
+      <p>I don't expect every day to be perfect. I hope for a future with honest talks, silly laughs, mutual respect, and two people who keep choosing kindness.</p>
+      <p class="shayari">Tere saath har pal ko khaas banana hai,<br>har khushi mein tera saath nibhana hai.<br>Na vaadon ka bojh, na koi zabardasti,<br>bas pyaar, bharosa aur samajh se rishta nibhana hai. ♡</p>
+      <div class="actions">
+        <button class="btn primary" onclick="go(9)">Yes, let's make memories ♡</button>
+        <button class="btn soft" onclick="go(11)">I need more time</button>
+      </div>
+      <p class="caption">Your feelings and your pace matter to me. Always.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 9: UNDER THE SAME SKY -->
+<section class="scene rooftop" id="p9">
+  <div class="content">
+    <div class="eyebrow">Under the same sky</div>
+    <h1>In my favourite <span class="accent">little universe</span> ✨</h1>
+    <div class="photo-frame">
+      <img src="images/image 9.jpg" alt="Under the same sky">
+    </div>
+    <div class="card">
+      <p>Chahe hum kitni bhi door hon, some memories still make the distance feel smaller. A song, a late-night talk, a silly joke — little things that remind me of you.</p>
+      <br>
+      <p>I hope life gives us more moments filled with warmth, laughter, patience, and peace.</p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="go(10)">Our little memories 🌙</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 10: TELEGRAM VC MEMORY -->
+<section class="scene" id="p10">
+  <div class="content">
+    <div class="eyebrow">The little things I remember</div>
+    <h1>Our Little <span class="accent">Memories</span> 🌙</h1>
+    <div class="photo-frame">
+      <img src="images/image 10.jpg" alt="A special memory">
+    </div>
+    <div class="card">
+      <p>Yaad hai woh raatein, jab hum Telegram par VC on karke soya karte the? Tum phone ko aise rakh deti thi ki koi dekh na le, aur main tumhe screen par dekhte-dekhte, tumhe nihaarte-nihaarte so jaata tha.</p>
+      <br>
+      <p>Mujhe subah tumhare uthne se pehle jaag jaana bhi yaad hai, bas isliye ki jab tum apni aankhein kholo, toh main wahin milun. Woh chhoti-chhoti baatein mere liye kitni special thi, shayad main kabhi poori tarah bata bhi nahi paunga.</p>
+      <br>
+      <p class="shayari">Raat bhar teri ek jhalak ka sukoon tha,<br>subah teri pehli muskaan ka junoon tha.<br>Woh VC, woh raatein, woh pyaari si baat,<br>meri favourite memories hain aaj bhi woh raat. ♡</p>
+      <br>
+      <p>I love all those little moments we shared. They weren't little to me — they were pieces of happiness I'll always treasure. ❤️</p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="go(11)">One last message 💌</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 11: GENTLE PROMISE -->
+<section class="scene" id="p11">
+  <div class="content">
+    <div class="eyebrow">Something I want you to know</div>
+    <h1>I'm still <span class="accent">learning</span> ♡</h1>
+    <div class="photo-frame">
+      <img src="images/image 11.jpg" alt="A promise from the heart">
+    </div>
+    <div class="card">
+      <p>I won't pretend that I will always know the perfect things to say. I'm still learning, and I'm still choosing kindness.</p>
+      <br>
+      <p>I want to listen instead of assume, understand instead of argue, and give you care without making you feel pressured.</p>
+      <br>
+      <p>My feelings are real, but so is my respect for your feelings. You don't owe me an answer just because I made this page. I made it to share what's in my heart, not to make you feel guilty. ♡</p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="go(12)">The final page ♡</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 12: FINAL -->
+<section class="scene" id="p12">
+  <div class="content">
+    <div class="eyebrow">And that's my little surprise</div>
+    <div class="photo-frame">
+      <img src="images/image12.jpg" alt="Made with love">
+    </div>
+    <h1>Thank you for being part of my <span class="accent">little world</span> ♡</h1>
+    <p>Whatever today feels like, I hope you remember that you deserve happiness, gentleness, and genuine care.</p>
+    <br>
+    <p class="final-glow">I Love You, Always. 💗</p>
+    <p class="caption">Made with love, just for you.</p>
+    <div class="actions">
+      <button class="btn primary" onclick="go(1)">Replay our little world ↻</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+const progressBar = document.getElementById("progressBar");
+
+function go(n) {
+  const target = document.getElementById("p" + n);
+  if (!target) return;
+
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  if (n === 7) startHeart();
+}
+
+async function toggleMusic() {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicBtn.textContent = "♫ Pause song";
+    } catch (error) {
+      musicBtn.textContent = "Tap to play ♫";
+    }
+  } else {
+    music.pause();
+    musicBtn.textContent = "♫ Play our song";
+  }
+}
+
+music.addEventListener("play", () => {
+  musicBtn.textContent = "♫ Pause song";
+});
+
+music.addEventListener("pause", () => {
+  musicBtn.textContent = "♫ Play our song";
+});
+
+function dodge(button) {
+  const messages = [
+    "Take your time. ♡",
+    "No pressure, sweetheart. 🌷",
+    "Your feelings matter. 💗"
+  ];
+
+  document.getElementById("choiceMessage").textContent =
+    messages[Math.floor(Math.random() * messages.length)];
+
+  button.animate([
+    { transform: "translateX(0)" },
+    { transform: "translateX(14px) rotate(4deg)" },
+    { transform: "translateX(-8px) rotate(-3deg)" },
+    { transform: "translateX(0)" }
+  ], { duration: 400 });
+}
+
+function revealLetter() {
+  const letter = document.getElementById("loveLetter");
+  letter.classList.add("show");
+
+  const button = document.getElementById("revealBtn");
+  button.textContent = "My heart, in words ♡";
+  button.disabled = true;
+
+  setTimeout(() => {
+    letter.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  }, 150);
+}
+
+/* Floating hearts and sparkles */
+const symbols = ["♡", "✦", "✧", "♥", "⋆"];
+
+function createPetal() {
+  const item = document.createElement("span");
+  item.className = "petal";
+  item.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  item.style.left = Math.random() * 100 + "vw";
+  item.style.fontSize = (10 + Math.random() * 18) + "px";
+  item.style.color = [
+    "#ff8cc9", "#ffe5a8", "#c5a4ff", "#ffffff"
+  ][Math.floor(Math.random() * 4)];
+  item.style.animationDuration = (9 + Math.random() * 10) + "s";
+
+  document.body.appendChild(item);
+  setTimeout(() => item.remove(), 20000);
+}
+
+setInterval(createPetal, 700);
+
+/* Reading progress bar */
+window.addEventListener("scroll", () => {
+  const max =
+    document.documentElement.scrollHeight - window.innerHeight;
+
+  const amount = max > 0 ? window.scrollY / max : 0;
+  progressBar.style.width = (amount * 100) + "%";
+}, { passive: true });
+
+/* Scene 7: glowing particle heart */
+const canvas = document.getElementById("heartCanvas");
+const ctx = canvas.getContext("2d");
+const heartTitle = document.getElementById("heartTitle");
+const heartSubtitle = document.getElementById("heartSubtitle");
+
+let particles = [];
+let heartStarted = false;
+let heartStartTime = 0;
+
+function heartPoint(t) {
+  return {
+    x: 16 * Math.pow(Math.sin(t), 3),
+    y: -(13 * Math.cos(t)
+      - 5 * Math.cos(2 * t)
+      - 2 * Math.cos(3 * t)
+      - Math.cos(4 * t))
+  };
+}
+
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = Math.max(1, rect.width * dpr);
+  canvas.height = Math.max(1, rect.height * dpr);
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function buildHeartParticles() {
+  particles = [];
+
+  for (let i = 0; i < 850; i++) {
+    const t = Math.random() * Math.PI * 2;
+    const edge = heartPoint(t);
+    const fill = Math.sqrt(Math.random());
+
+    particles.push({
+      x: edge.x * fill,
+      y: edge.y * fill,
+      size: Math.random() * 2.1 + .45,
+      phase: Math.random() * Math.PI * 2,
+      speed: .4 + Math.random() * 1.5,
+      hue: Math.random() < .5 ? 330 : 275,
+      delay: Math.random() * 1800
+    });
+  }
+}
+
+function drawHeart(time) {
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  ctx.clearRect(0, 0, w, h);
+
+  const scale = Math.min(w / 38, h / 34);
+  const cx = w / 2;
+  const cy = h / 2 + 3;
+  const elapsed = time - heartStartTime;
+
+  /* Gradually trace the glowing heart outline */
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(scale, scale);
+
+  for (let line = 0; line < 3; line++) {
+    const end = Math.min(
+      Math.PI * 2,
+      Math.max(0, elapsed / 3500 - line * .4)
+    );
+
+    ctx.beginPath();
+
+    for (let t = 0; t <= end; t += .025) {
+      const point = heartPoint(t);
+
+      if (t === 0) ctx.moveTo(point.x, point.y);
+      else ctx.lineTo(point.x, point.y);
+    }
+
+    ctx.strokeStyle = line === 1
+      ? "rgba(255,120,215,.5)"
+      : "rgba(183,125,255,.4)";
+
+    ctx.lineWidth = .15;
+    ctx.shadowBlur = 2;
+    ctx.shadowColor = "#ff5ac8";
+    ctx.stroke();
+  }
+
+  ctx.restore();
+
+  /* Sparkles slowly fill the heart */
+  for (const p of particles) {
+    const appear = Math.max(
+      0,
+      Math.min(1, (elapsed - p.delay) / 1500)
+    );
+
+    if (!appear) continue;
+
+    const twinkle =
+      .45 + .55 * Math.sin(time * .002 * p.speed + p.phase);
+
+    const pulse = 1 + Math.sin(time * .0015 + p.phase) * .025;
+    const x = cx + p.x * scale * pulse;
+    const y = cy + p.y * scale * pulse;
+
+    ctx.beginPath();
+    ctx.arc(x, y, p.size * (1 + twinkle * .5), 0, Math.PI * 2);
+    ctx.fillStyle =
+      `hsla(${p.hue},100%,${72 + twinkle * 22}%,${appear * twinkle})`;
+
+    ctx.shadowBlur = 8 * twinkle;
+    ctx.shadowColor = "#ff5ac8";
+    ctx.fill();
+
+    if (p.size > 1.7 && twinkle > .86) {
+      ctx.beginPath();
+      ctx.moveTo(x - 4, y);
+      ctx.lineTo(x + 4, y);
+      ctx.moveTo(x, y - 4);
+      ctx.lineTo(x, y + 4);
+      ctx.strokeStyle = `rgba(255,225,250,${appear * .8})`;
+      ctx.lineWidth = .7;
+      ctx.stroke();
+    }
+  }
+
+  /* Orbiting stars */
+  for (let i = 0; i < 12; i++) {
+    const angle = time * .00025 + i * Math.PI * 2 / 12;
+    const x = cx + Math.cos(angle) * w * .39;
+    const y = cy + Math.sin(angle) * h * .34;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = "#ffe6ff";
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "#ff8bda";
+    ctx.fill();
+  }
+
+  ctx.shadowBlur = 0;
+  requestAnimationFrame(drawHeart);
+}
+
+function startHeart() {
+  if (heartStarted) return;
+  heartStarted = true;
+
+  resizeCanvas();
+  buildHeartParticles();
+  heartStartTime = performance.now();
+
+  requestAnimationFrame(drawHeart);
+
+  setTimeout(() => heartTitle.classList.add("visible"), 1800);
+  setTimeout(() => heartSubtitle.classList.add("visible"), 3000);
+}
+
+window.addEventListener("resize", () => {
+  if (heartStarted) resizeCanvas();
+});
+
+/* Start the heart when scene 7 appears */
+const heartObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && entry.target.id === "p7") {
+      startHeart();
+    }
+  });
+}, { threshold: .35 });
+
+document.querySelectorAll(".scene").forEach(scene => {
+  heartObserver.observe(scene);
+});
+</script>
+
+</body>
+</html>
